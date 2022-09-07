@@ -1,21 +1,31 @@
 # **AltSchool-Cloud-Exercise**
-## Alt School Progress
+## __Alt School Progress__
 
 ## **WEEK 1**
 
-### *Exercise 1*
+### __*Exercise 1*__
 <li> ifconfig Task - Errors were shown so my screenshot showed 2 answers one was the error using dhcp and the other was with the static ip. 
 <br>
 When I understand linux better I would  come back and fix the dhcp error on my Mac.
 <br>
 <br>
 
-### *Exercise 2*
+### __*Exercise 2*__
+<li> 10 Linux Command Task
+<br>
+<br>
+
+### __*Exercise 3*__
 <li> Timezone Task
 <br>
 <br>
 
-### *Exercise 3*
-<li> 10 Linux Command Task
+### __*Exercise 4*__
+<li> User, Group and SSH for Admin Group User
+<br>
+<br>
+
+### __*Exercise 5*__
+<li> Install PHP 7.4
 <br>
 <br>
