@@ -29,3 +29,8 @@ When I understand linux better I would  come back and fix the dhcp error on my M
 <li> Install PHP 7.4
 <br>
 <br>
+
+### __*Exercise 6*__
+<li> Git Task
+<br>
+<br>
