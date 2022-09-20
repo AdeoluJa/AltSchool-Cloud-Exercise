@@ -34,3 +34,8 @@ When I understand linux better I would  come back and fix the dhcp error on my M
 <li> Git Task
 <br>
 <br>
+
+### __*Exercise 7*__
+<li> 10 CIS Benchmark Task
+<br>
+<br>
