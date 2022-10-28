@@ -66,3 +66,8 @@ When I understand linux better I would  come back and fix the dhcp error on my M
 <li> IP Addressing Task
 <br>
 <br>
+
+## **MINIPROJECT**
+<li> Hosting the laravel app on my domain with the help of AWS
+<br>
+<br>
