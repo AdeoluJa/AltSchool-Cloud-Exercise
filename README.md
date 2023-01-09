@@ -71,3 +71,8 @@ When I understand linux better I would  come back and fix the dhcp error on my M
 <li> Hosting the laravel app on my domain with the help of AWS
 <br>
 <br>
+
+## **HOLIDAY CHALLENGE**
+<li> Created private instances on Aws and deployed nginx and php into them using Ansible
+<br>
+<br>
