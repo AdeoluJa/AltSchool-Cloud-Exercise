@@ -1,57 +1,67 @@
-# For more information: https://laravel.com/docs/sail
-version: '3.9'
-
+version: '3.7'
 services:
-    laravel.test:
-        build:
-            context: ./vendor/laravel/sail/runtimes/8.1
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.1/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
-            - '${HMR_PORT:-8080}:8080'
-        environment:
-            PHP_IDE_CONFIG: 'serverName=laravel-realworld.test'
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-        volumes:
-            - '.:/var/www/html'
-        networks:
-            - sail
-        depends_on:
-            - pgsql
 
-    pgsql:
-        image: 'postgres:14-alpine'
-        ports:
-            - '${FORWARD_DB_PORT:-5432}:5432'
-        environment:
-            PGPASSWORD: '${DB_PASSWORD:-secret}'
-            POSTGRES_DB: '${DB_DATABASE}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
-        volumes:
-            - 'sail-pgsql:/var/lib/postgresql/data'
-            - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
-        networks:
-            - sail
-        healthcheck:
-            test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
-            retries: 3
-            timeout: 5s
+  # PHP Service
+  app:
+    build:
+      args:
+        user: ade
+        uid: 1000
+      context: ./
+      dockerfile: docker/Dockerfile
+    image: laravelphp
+    container_name: laravel-app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - laravel
+
+  # Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: laravel-nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/laravel.conf:/etc/nginx/conf.d/app.conf
+      - ./docker/nginx:/var/log/nginx
+    networks:
+      - laravel
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.41
+    container_name: laravel-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - my-dbdata:/var/lib/mysql/
+      - ./docker/mysql/db.cnf:/etc/mysql/my.cnf
+    networks:
+      - laravel
 
 networks:
-    sail:
-        name: laravel-realworld-network
-        driver: bridge
+  laravel:
+    driver: bridge
 
 volumes:
-    sail-pgsql:
-        name: laravel-realworld-database
-        driver: local
+  my-dbdata:
+    driver: local
