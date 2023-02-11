@@ -81,3 +81,14 @@ When I understand linux better I would  come back and fix the dhcp error on my M
 <li> Using terraform create 3 EC2 instances and put them behind an Elastic Load Balancer, add a domain using route53 within your terraform plan and then add an A record for subdomain terraform-test that points to your ELB IP address, export the instances IP address into a host-inventory file and create and ansible script that install apache2, set timezone to Africa/Lagos and display a simple html page and terraform-test.your_domain_name should display content that identify the 3 instances.
 <br>
 <br>
+
+## **LARAVEL APP ASSIGNMENT**
+<li> Write a dockerfile for the laravel app, write a docker compose file for the services involved in the laravel.
+<br>
+Mount a volume to write
+<br>
+a) real time log entry
+<br>
+b) mysql data - name these directories whatever you like
+<br>
+<br>
