@@ -176,3 +176,17 @@ See link below:
 <br>
 
 NOTE: No migration was run on this laravel app
+<br>
+<br>
+<br>
+<br>
+
+
+## __LARAVEL APP SHOWING ON IP ADDRESS__
+<br>
+
+*See the output below*
+![ip Address](./images/ip.png)
+<br>
+
+<br>
